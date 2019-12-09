@@ -1,22 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="?attr/colorPrimary"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:overScrollMode="never">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/bing_pic_img"
+            android:adjustViewBounds="true" />
+    </HorizontalScrollView>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        >
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             app:cardCornerRadius="15dp"
             android:elevation="15dp"
+            app:cardBackgroundColor="#8000"
             >
 
             <LinearLayout
@@ -27,49 +44,68 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_update_time"/>
+                    android:id="@+id/text_update_time"
+                    android:textColor="#ffff"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_cid"/>
+                    android:id="@+id/text_cid"
+                    android:textColor="#ffff"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_location"/>
+                    android:id="@+id/text_location"
+                    android:textSize="18sp"
+                    android:textColor="#ffff"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_condition"/>
+                    android:id="@+id/text_condition"
+                    android:textSize="18sp"
+                    android:textColor="#ffff"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_minimum_temperature"/>
+                    android:id="@+id/text_minimum_temperature"
+                    android:textColor="#ffff"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_maximum_temperature"/>
+                    android:id="@+id/text_maximum_temperature"
+                    android:textColor="#ffff"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_now_time_temperature"/>
+                    android:textSize="18sp"
+                    android:id="@+id/text_now_time_temperature"
+                    android:textColor="#ffff"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_wind_degree"/>
+                    android:id="@+id/text_wind_degree"
+                    android:textColor="#ffff"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_wind_direction"/>
+                    android:id="@+id/text_wind_direction"
+                    android:textColor="#ffff"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_wind_speed"/>
+                    android:id="@+id/text_wind_speed"
+                    android:textColor="#ffff"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="服务器给我们的数据其实是下面这样的，而我只是把它提取出来组织成上面那样。"
+                    android:textColor="#66ffcc"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_origin"
-                    android:background="#66ffcc"/>
+                    android:textColor="#66ffcc"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </ScrollView>
-</LinearLayout>
+</FrameLayout>
