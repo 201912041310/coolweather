@@ -26,7 +26,7 @@
             android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/ic_launcher_background"/>
+            android:background="@android:drawable/button_onoff_indicator_on"/>
 
     </RelativeLayout>
 

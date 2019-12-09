@@ -37,6 +37,8 @@ public class WeatherActivity extends AppCompatActivity {
     private TextView windDirection;
     private TextView windSpeed;
 
+    private TextView originText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +56,13 @@ public class WeatherActivity extends AppCompatActivity {
         windDirection = findViewById(R.id.text_wind_direction);
         windSpeed = findViewById(R.id.text_wind_speed);
 
+        originText =findViewById(R.id.text_origin);
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
-        if (//weatherString != null
+        if (
+                //是否有历史查询
+                //weatherString != null
         false) {
             //有缓存时直接解析天气数据
             Weather weather = Utility.handleWeatherResponse(weatherString);
@@ -92,6 +98,7 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (weather!=null&&"ok".equals(weather.status)){
+                            originText.setText(responseText);
                             SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
                             editor.putString("weather",responseText);
                             editor.apply();
@@ -121,6 +128,6 @@ public class WeatherActivity extends AppCompatActivity {
     public void onBackPressed() {
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
-        this.finish();
+        finish();
     }
 }

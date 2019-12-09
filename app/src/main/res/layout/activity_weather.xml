@@ -64,15 +64,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/text_wind_speed"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/text_origin"
+                    android:background="#66ffcc"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
-
-
     </ScrollView>
-
-
-
-
-
 </LinearLayout>
