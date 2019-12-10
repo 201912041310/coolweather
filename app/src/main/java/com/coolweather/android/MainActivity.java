@@ -15,11 +15,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //查询默认SharePreference是否有数据，如果有就跳过地址选择
-//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        if (preferences.getString("weather",null)!=null){
-//            Intent intent =new Intent(this,WeatherActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (preferences.getString("weather",null)!=null){
+            Intent intent =new Intent(this,WeatherActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

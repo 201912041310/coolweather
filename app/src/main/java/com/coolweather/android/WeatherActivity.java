@@ -1,6 +1,8 @@
 package com.coolweather.android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -45,6 +47,9 @@ public class WeatherActivity extends AppCompatActivity {
 
     private TextView originText;
 
+    public SwipeRefreshLayout swipeRefreshLayout;
+    public DrawerLayout drawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,18 +71,26 @@ public class WeatherActivity extends AppCompatActivity {
 
         originText =findViewById(R.id.text_origin);
 
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh);
+        drawerLayout = findViewById(R.id.drawer_layout);
+
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
+
+        final String weatherId ;
+
         if (
                 //是否有历史查询
-                //weatherString != null
-        false) {
+                weatherString != null
+//        false
+        ) {
             //有缓存时直接解析天气数据
             Weather weather = Utility.handleWeatherResponse(weatherString);
             showWeatherInfo(weather);
+            weatherId = weather.basic.cId;
         } else {
             //无缓存时去服务器查询天气
-            String weatherId = getIntent().getStringExtra("weather_id");
+            weatherId = getIntent().getStringExtra("weather_id");
             requestWeather(weatherId);
 
         }
@@ -85,12 +98,20 @@ public class WeatherActivity extends AppCompatActivity {
         String bingPic = prefs.getString("bing_pic",null);
         if (
                 //查询是否有图片
-                // bingPic!=null
-        false){
+                 bingPic!=null
+//        false
+        ){
             Glide.with(this).load(bingPic).into(bingPicImg);
         }else {
             loadBingPic();
         }
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                requestWeather(weatherId);
+            }
+        });
     }
 
     private void loadBingPic() {
@@ -118,7 +139,7 @@ public class WeatherActivity extends AppCompatActivity {
         });
     }
 
-    private void requestWeather(String weatherId) {
+    public void requestWeather(String weatherId) {
         String weatherUrl = "https://free-api.heweather.net/s6/weather/now?location=" + weatherId + "&key=de9d992588664ac28c3cc3fd23421541";
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
             @Override
@@ -128,6 +149,7 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
 
@@ -146,7 +168,10 @@ public class WeatherActivity extends AppCompatActivity {
                             editor.putString("weather",responseText);
                             editor.apply();
                             showWeatherInfo(weather);
-                        }else Toast.makeText(WeatherActivity.this, "获取天气信息失败"+weather.status, Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(WeatherActivity.this, "获取天气信息失败"+weather.status, Toast.LENGTH_SHORT).show();
+                        }
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 });
             }
