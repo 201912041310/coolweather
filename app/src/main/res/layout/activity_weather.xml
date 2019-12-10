@@ -34,8 +34,12 @@
             </HorizontalScrollView>
 
 
-            <ScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
                 android:scrollbars="none">
@@ -135,7 +139,16 @@
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </ScrollView>
-
+            <Button
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="15dp"
+                android:layout_width="15dp"
+                android:layout_height="match_parent"
+                android:textColor="#ffff"
+                android:text="《"
+                android:id="@+id/button_nav"
+                android:background="#8000"/>
+            </LinearLayout>
 
         </FrameLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
