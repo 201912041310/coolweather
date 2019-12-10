@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.coolweather.android.gson.Weather;
+import com.coolweather.android.service.AutoUpdateService;
 import com.coolweather.android.util.HttpUtil;
 import com.coolweather.android.util.Utility;
 
@@ -195,22 +196,28 @@ public class WeatherActivity extends AppCompatActivity {
 
     //处理并展示Weather实体类中的数据
     private void showWeatherInfo(Weather weather) {
-        updateTime.setText("更新时间："+weather.update.updateTime);
-        location.setText("位置："+weather.basic.locationName);
-        cid.setText("位置编号："+weather.basic.cId);
-        condition.setText("天气："+weather.now.condition_txt);
-        minimumTemperature.setText("最低温度："+weather.now.minimumTemperature+"℃");
-        maximumTemperature.setText("最高温度："+weather.now.maximumTemperature+"℃");
-        nowTimeTemperature.setText("当前温度："+weather.now.nowTimeTemperature+"℃");
-        windDegree.setText("风强："+weather.now.windDegree+"级");
-        windDirection.setText("风向："+weather.now.windDirection);
-        windSpeed.setText("风速："+weather.now.windSpeed+"m/s");
+        if (weather!=null&&"ok".equals(weather.status)) {
+            updateTime.setText("更新时间：" + weather.update.updateTime);
+            location.setText("位置：" + weather.basic.locationName);
+            cid.setText("位置编号：" + weather.basic.cId);
+            condition.setText("天气：" + weather.now.condition_txt);
+            minimumTemperature.setText("最低温度：" + weather.now.minimumTemperature + "℃");
+            maximumTemperature.setText("最高温度：" + weather.now.maximumTemperature + "℃");
+            nowTimeTemperature.setText("当前温度：" + weather.now.nowTimeTemperature + "℃");
+            windDegree.setText("风强：" + weather.now.windDegree + "级");
+            windDirection.setText("风向：" + weather.now.windDirection);
+            windSpeed.setText("风速：" + weather.now.windSpeed + "m/s");
+            Intent intent = new Intent(this, AutoUpdateService.class);
+            startService(intent);
+        }else {
+            Toast.makeText(this, "获取天气信息失败："+weather.status, Toast.LENGTH_SHORT).show();
+        }
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(this,MainActivity.class);
+//        startActivity(intent);
+//        finish();
+//    }
 }
