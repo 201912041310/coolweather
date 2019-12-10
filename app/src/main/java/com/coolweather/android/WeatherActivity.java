@@ -178,7 +178,7 @@ public class WeatherActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         if (weather!=null&&"ok".equals(weather.status)){
-                            originText.setText(responseText);
+                            originText.setText("服务器返回的数据其实是：\r\n"+responseText+"\r\n而我们把它们提取成上面那样");
                             SharedPreferences.Editor editor=PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
                             editor.putString("weather",responseText);
                             editor.apply();

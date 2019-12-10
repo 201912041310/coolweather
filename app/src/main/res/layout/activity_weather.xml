@@ -124,12 +124,6 @@
                             android:layout_height="wrap_content"
                             android:textColor="#ffff" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="服务器给我们的数据其实是下面这样的，而我只是把它提取出来组织成上面那样。"
-                            android:textColor="#66ffcc"
-                            android:textSize="20sp" />
 
                         <TextView
                             android:id="@+id/text_origin"
